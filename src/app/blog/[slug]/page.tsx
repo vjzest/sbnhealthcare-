@@ -6,9 +6,13 @@ import { getDynamicMetadata } from '@/utils/seo';
 import { notFound } from 'next/navigation';
 import PageHeader from '@/components/layout/PageHeader';
 
+export const revalidate = 0;
+
 async function getPost(slug: string) {
     try {
-        const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/blogs/slug/${slug}`);
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/blogs/slug/${slug}`, {
+            params: { _t: Date.now() }
+        });
         return res.data.data;
     } catch (err) {
         return null;
