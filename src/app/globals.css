@@ -1,0 +1,110 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+
+  /* Enterprise Healthcare Theme */
+  /* Primary Background (Deep Enterprise Navy) - Header, Footer, Hero */
+  --secondary-color: #0B1F33;
+
+  /* Professional Teal (Section highlights, Links) */
+  --primary-color: #1FA6A0;
+
+  /* Accent / KPI (Muted Gold) */
+  --accent-color: #D6A84A;
+
+  /* Text Colors */
+  --heading-color: #0F172A;
+  --text-color: #475569;
+  --success-color: #1FA6A0;
+  /* Linking success to primary teal for consistency */
+
+  /* Backgrounds */
+  --bg-white: #ffffff;
+  --bg-light: #F5F7FA;
+  /* Soft Off-White for content sections */
+
+  --font-family: var(--font-asap), sans-serif;
+  --max-width: 1200px;
+  --header-height: 90px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  color: var(--text-color);
+  background-color: var(--bg-white);
+  line-height: 30px;
+  /* from source */
+  font-size: 16px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--heading-color);
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+a {
+  text-decoration: none;
+  color: var(--primary-color);
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--accent-color);
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.section {
+  padding: 100px 0;
+}
+
+.btn {
+  display: inline-block;
+  padding: 15px 40px;
+  border-radius: 30px;
+  /* Rounded buttons as per source */
+  font-weight: 600;
+  font-size: 16px;
+  transition: all 0.4s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #005d3f;
+  /* from source hover */
+  color: white;
+}
