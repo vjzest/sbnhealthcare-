@@ -18,35 +18,44 @@ const PageHeader: React.FC<PageHeaderProps> = ({
 }) => {
     return (
         <div
-            className="relative bg-cover bg-center py-[120px] md:py-[180px] text-center text-white overflow-hidden"
-            style={{ backgroundImage: `linear-gradient(rgba(11, 31, 51, 0.85), rgba(11, 31, 51, 0.95)), url('${bgImage}')` }}
+            className="relative py-[140px] md:py-[220px] text-center text-white overflow-hidden bg-no-repeat bg-center bg-cover"
+            style={{ backgroundImage: `linear-gradient(rgba(11, 31, 51, 0.80), rgba(11, 31, 51, 0.80)), url('${bgImage}')` }}
         >
             <div className="container mx-auto px-4 relative z-10">
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
-                    className="max-w-[900px] mx-auto"
+                    transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                    className="max-w-[1000px] mx-auto"
                 >
                     {subtitle && (
-                        <span className="inline-block bg-[var(--primary-color)] text-white font-bold uppercase text-[12px] tracking-[3px] mb-6 px-4 py-1.5 rounded-full shadow-lg">
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ delay: 0.2 }}
+                            className="inline-flex items-center gap-3 bg-[var(--primary-color)]/10 border border-[var(--primary-color)]/30 text-[var(--primary-color)] font-black uppercase text-[10px] tracking-[5px] mb-8 px-6 py-2 rounded-full backdrop-blur-md shadow-2xl"
+                        >
+                            <span className="w-1.5 h-1.5 bg-[var(--primary-color)] rounded-full animate-pulse"></span>
                             {subtitle}
-                        </span>
+                        </motion.div>
                     )}
-                    <h1 className="text-[3rem] md:text-[4.5rem] font-black text-white leading-tight mb-6 tracking-tight">
-                        {title}
+                    <h1 className="text-[3.5rem] md:text-[5.5rem] font-black text-white leading-[1.05] mb-8 tracking-[-0.03em] drop-shadow-2xl">
+                        {title.split(' ').map((word, i) => (
+                            <span key={i} className="inline-block mr-[0.2em] last:mr-0">{word}</span>
+                        ))}
                     </h1>
                     {description && (
-                        <p className="text-[1.1rem] md:text-[1.35rem] text-slate-200 max-w-[750px] mx-auto leading-relaxed opacity-90 font-medium">
+                        <motion.p
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: 0.4 }}
+                            className="text-[1.1rem] md:text-[1.4rem] text-slate-300 max-w-[800px] mx-auto leading-relaxed font-medium tracking-tight"
+                        >
                             {description}
-                        </p>
+                        </motion.p>
                     )}
                 </motion.div>
             </div>
-
-            {/* Subtle background decoration */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -mr-32 -mt-32"></div>
-            <div className="absolute bottom-0 left-0 w-64 h-64 bg-[var(--primary-color)]/10 rounded-full blur-3xl -ml-32 -mb-32"></div>
         </div>
     );
 };

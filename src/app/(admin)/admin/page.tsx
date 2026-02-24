@@ -47,7 +47,7 @@ export default function AdminLoginPage() {
                             type="email"
                             required
                             className="w-full px-6 py-4 rounded-xl border border-slate-200 focus:outline-none focus:border-[var(--primary-color)] font-medium"
-                            placeholder="admin@sbnhealthcare.com"
+                            placeholder="Email Address"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                         />
@@ -58,7 +58,7 @@ export default function AdminLoginPage() {
                             type="password"
                             required
                             className="w-full px-6 py-4 rounded-xl border border-slate-200 focus:outline-none focus:border-[var(--primary-color)] font-medium"
-                            placeholder="••••••••"
+                            placeholder="Password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />

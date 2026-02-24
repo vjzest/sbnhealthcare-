@@ -28,11 +28,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={asap.variable}>
         <ReduxProvider>
-          <Header />
-          <main>{children}</main>
-          <Footer />
-          <CookieConsent />
-          <Chatbot />
+          {children}
         </ReduxProvider>
       </body>
     </html>

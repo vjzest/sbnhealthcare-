@@ -9,23 +9,31 @@ const navLinks = [
     { name: 'Home', href: '/' },
     { name: 'About Us', href: '/about-us' },
     {
-        name: 'Our Services',
+        name: 'Solutions',
         href: '#',
         dropdown: [
-            { name: 'Eligibility Verification', href: '/services/eligibility-verification' },
-            { name: 'Medical Billing', href: '/services/medical-billing' },
-            { name: 'Medical Coding', href: '/services/medical-coding' },
-            { name: 'AR Follow-up & Denial Management', href: '/services/ar-follow-up-and-denial-management' },
-            { name: 'Credentialing & Contracting', href: '/services/credentialing-and-contracting' },
-            { name: 'Credit Balance Resolution', href: '/services/credit-balance-resolution' },
-            { name: 'More Services', href: '/services' },
+            { name: 'Eligibility & Front Office', href: '/services/eligibility-verification' },
+            { name: 'Revenue Cycle Management', href: '/services/medical-billing' },
+            { name: 'Denial Management', href: '/services/ar-follow-up-and-denial-management' },
+            { name: 'Coding Accuracy', href: '/services/medical-coding' },
+            { name: 'Credentialing', href: '/services/credentialing-and-contracting' },
+            { name: 'More Solutions', href: '/services' },
         ]
     },
-    { name: 'White Paper', href: '/white-paper' },
-    { name: 'Security', href: '/security' },
-    { name: 'Pricing', href: '/pricing' },
+    {
+        name: 'Specialties',
+        href: '#',
+        dropdown: [
+            { name: 'Behavioral Health', href: '/specialties/behavioral-health' },
+            { name: 'DME / Orthopedics', href: '/specialties/dme-orthopedics' },
+            { name: 'Urgent Care & Telehealth', href: '/specialties/urgent-care-telehealth' },
+            { name: 'Small–Mid Practices', href: '/specialties/small-mid-practices' },
+        ]
+    },
+    { name: 'Resources', href: '/white-paper' },
+    { name: 'Compliance & Security', href: '/security' },
     { name: 'RCM Calculator', href: '/rcm-calculator' },
-    { name: 'Career', href: '/career' },
+    { name: 'Pricing', href: '/pricing' },
     { name: 'Contact Us', href: '/contact-us' },
 ];
 

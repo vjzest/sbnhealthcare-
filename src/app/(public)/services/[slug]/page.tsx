@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Link from 'next/link';
 import type { Metadata } from 'next';
@@ -5,6 +6,11 @@ import { notFound } from 'next/navigation';
 import { servicesList } from '@/data/services';
 import PageHeader from '@/components/layout/PageHeader';
 import { getDynamicMetadata } from '@/utils/seo';
+import KPIMetrics from '@/components/sections/KPIMetrics';
+import WorkflowVisual from '@/components/sections/WorkflowVisual';
+import ProblemSnapshot from '@/components/sections/ProblemSnapshot';
+import AIIndicator from '@/components/sections/AIIndicator';
+import ComplianceShield from '@/components/sections/ComplianceShield';
 
 interface Props {
     params: {
@@ -14,11 +20,7 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { slug } = params;
-
-    // 1. Try to get dynamic SEO data from Admin panel
     const dynamic = await getDynamicMetadata(slug);
-
-    // 2. Fallback to static service data if not found or incomplete
     const service = servicesList.find((s) => s.slug === slug);
     if (!service) return { title: dynamic?.title || 'Service Not Found' };
 
@@ -50,49 +52,33 @@ export default async function ServicePage({ params }: Props) {
                 description={service.description}
             />
 
-            {/* Features (if Top) */}
-            {service.showFeaturesTop && service.features && (
-                <section className="py-[100px] relative bg-[#f8faff] bg-[radial-gradient(#e1e7f5_1px,transparent_1px)] bg-[length:20px_20px]">
-                    <div className="container mx-auto px-4">
-                        {service.featuresTitle && (
-                            <div className="text-center mb-[70px]">
-                                <h2 className="text-[36px] font-bold text-slate-800 mb-[20px] relative pb-[25px] inline-block after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-[60px] after:h-[4px] after:bg-[var(--primary-color)] after:rounded-sm">
-                                    {service.featuresTitle}
-                                </h2>
-                                {service.featuresDescription && (
-                                    <p className="text-slate-500 max-w-[700px] mx-auto text-[18px] leading-[1.7]">
-                                        {service.featuresDescription}
-                                    </p>
-                                )}
-                            </div>
-                        )}
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-[40px]">
-                            {service.features.map((feature, index) => (
-                                <div key={index} className="bg-white p-[40px_30px] rounded-xl shadow-[0_10px_30px_rgba(11,31,51,0.05)] text-center transition-all duration-500 border border-slate-100 h-full hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(11,31,51,0.12)] hover:border-slate-200 group">
-                                    <div className="text-[48px] text-[var(--primary-color)] mb-[25px] bg-[#1fa6a0]/10 w-[90px] h-[90px] flex items-center justify-center rounded-full mx-auto transition-all duration-300 group-hover:bg-[var(--primary-color)] group-hover:text-white group-hover:[transform:rotateY(180deg)]">
-                                        <feature.icon />
-                                    </div>
-                                    <h3 className="text-[22px] font-bold mb-[15px] text-slate-800">
-                                        {feature.title}
-                                    </h3>
-                                    {feature.description && (
-                                        <p className="text-slate-500 leading-[1.7] text-[16px]">
-                                            {feature.description}
-                                        </p>
-                                    )}
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </section>
-            )}
-
             {/* Dynamic Sections */}
             {service.sections.map((section, index) => {
                 const isBgGray = index % 2 !== 0 && section.type !== 'cta';
                 const isCta = section.type === 'cta';
 
-                // Base classes
+                // Handle Specialized Section Types
+                if (section.type === 'problem-snapshot') {
+                    return <ProblemSnapshot key={index} title={section.title} points={section.data || []} />;
+                }
+
+                if (section.type === 'workflow') {
+                    return <WorkflowVisual key={index} title={section.title} subtitle={section.subtitle} steps={section.data || []} />;
+                }
+
+                if (section.type === 'kpi') {
+                    return <KPIMetrics key={index} title={section.title} subtitle={section.subtitle} metrics={section.data || []} />;
+                }
+
+                if (section.type === 'ai-indicator') {
+                    return <AIIndicator key={index} stage={section.stage || ''} description={section.description || ''} impact={section.data || ''} />;
+                }
+
+                if (section.type === 'compliance-shield') {
+                    return <ComplianceShield key={index} />;
+                }
+
+                // Base classes for standard sections
                 let sectionClasses = "py-[100px] relative";
                 if (isBgGray) sectionClasses += " bg-[#f8faff]";
                 if (isCta) sectionClasses = "bg-[var(--secondary-color)] text-white relative py-[80px] overflow-hidden";
@@ -119,9 +105,7 @@ export default async function ServicePage({ params }: Props) {
                                     </div>
                                 </div>
                             ) : (
-                                // Split Row
                                 <div className="flex flex-col md:flex-row items-center gap-[60px]">
-                                    {/* Image Left - Rendered only if position is left */}
                                     {section.image && section.imagePosition === 'left' && (
                                         <div className="flex-1 min-w-[300px] w-full">
                                             <div className="w-full relative">
@@ -134,7 +118,6 @@ export default async function ServicePage({ params }: Props) {
                                         </div>
                                     )}
 
-                                    {/* Content Column */}
                                     <div className={`${section.image ? 'flex-1 min-w-[300px]' : 'flex-1 w-full'}`}>
                                         {section.title && (
                                             <h2 className="text-[32px] font-bold text-slate-800 mb-[30px] leading-[1.3]">
@@ -161,7 +144,6 @@ export default async function ServicePage({ params }: Props) {
                                         )}
                                     </div>
 
-                                    {/* Image Right - Rendered only if position is right */}
                                     {section.image && section.imagePosition === 'right' && (
                                         <div className="flex-1 min-w-[300px] w-full">
                                             <div className="w-full relative">
@@ -180,26 +162,36 @@ export default async function ServicePage({ params }: Props) {
                 );
             })}
 
-            {/* Features (if Bottom) */}
-            {!service.showFeaturesTop && service.features && (
-                <section className="py-[100px] relative bg-[#f8fafc]">
+            {/* High-Impact Features Section */}
+            {service.features && (
+                <section className="py-[100px] relative bg-[#f8faff] bg-[radial-gradient(#e1e7f5_1px,transparent_1px)] bg-[length:20px_20px]">
                     <div className="container mx-auto px-4">
                         {service.featuresTitle && (
                             <div className="text-center mb-[70px]">
                                 <h2 className="text-[36px] font-bold text-slate-800 mb-[20px] relative pb-[25px] inline-block after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-[60px] after:h-[4px] after:bg-[var(--primary-color)] after:rounded-sm">
                                     {service.featuresTitle}
                                 </h2>
+                                {service.featuresDescription && (
+                                    <p className="text-slate-500 max-w-[700px] mx-auto text-[18px] leading-[1.7]">
+                                        {service.featuresDescription}
+                                    </p>
+                                )}
                             </div>
                         )}
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-[40px]">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[40px]">
                             {service.features.map((feature, index) => (
-                                <div key={index} className="bg-white p-[35px_25px] text-center rounded-lg shadow-[0_4px_6px_-1px_rgba(0,0,0,0.05)] h-full border-t-4 border-blue-600 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
-                                    <div className="text-[32px] text-blue-600 mb-[15px] flex justify-center">
+                                <div key={index} className="bg-white p-[40px_30px] rounded-xl shadow-[0_10px_30px_rgba(11,31,51,0.05)] text-center transition-all duration-500 border border-slate-100 h-full hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(11,31,51,0.12)] hover:border-slate-200 group">
+                                    <div className="text-[48px] text-[var(--primary-color)] mb-[25px] bg-[#1fa6a0]/10 w-[90px] h-[90px] flex items-center justify-center rounded-full mx-auto transition-all duration-300 group-hover:bg-[var(--primary-color)] group-hover:text-white group-hover:[transform:rotateY(180deg)]">
                                         <feature.icon />
                                     </div>
-                                    <h3 className="text-[18px] font-semibold m-0 text-slate-700">
+                                    <h3 className="text-[22px] font-bold mb-[15px] text-slate-800">
                                         {feature.title}
                                     </h3>
+                                    {feature.description && (
+                                        <p className="text-slate-500 leading-[1.7] text-[16px]">
+                                            {feature.description}
+                                        </p>
+                                    )}
                                 </div>
                             ))}
                         </div>

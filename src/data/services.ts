@@ -6,11 +6,15 @@ import {
 
 export interface ServiceSection {
     title?: string;
+    subtitle?: string;
+    stage?: string;
+    description?: string;
     content?: string | string[]; // String or array of paragraphs
     image?: string;
     imagePosition?: 'left' | 'right';
     list?: string[];
-    type?: 'standard' | 'cta'; // CTA for the blue/chart sections
+    type?: 'standard' | 'cta' | 'problem-snapshot' | 'workflow' | 'kpi' | 'ai-indicator' | 'compliance-shield';
+    data?: any; // For specialized component data
 }
 
 export interface ServiceFeature {
@@ -31,6 +35,83 @@ export interface Service {
     showFeaturesTop?: boolean; // Some pages show features before intro
 }
 
+export const specialtiesList: Service[] = [
+    {
+        title: "Behavioral Health",
+        slug: "behavioral-health",
+        bannerTitle: "Specialized Revenue Solutions for Behavioral Health",
+        description: "Optimizing mental health and substance abuse billing with precision and compliance.",
+        sections: [
+            {
+                type: 'problem-snapshot',
+                title: 'Behavioral Health Billing Hurdles',
+                data: [
+                    { title: 'Complex Prior Auth', description: 'Mental health services often require multi-layered approvals that slow down care.' },
+                    { title: 'Coding Variances', description: 'Unique CPT codes for psychotherapy and group sessions often lead to errors.' },
+                    { title: 'Session Tracking', description: 'Difficulties in tracking unit limits per patient per benefit period.' }
+                ]
+            },
+            {
+                type: 'workflow',
+                title: 'The SBN Behavioral Cycle',
+                subtitle: 'Precision Process',
+                data: [
+                    { title: 'Verify', description: 'Real-time check for mental health benefits and visit limits.' },
+                    { title: 'Authorize', description: 'Automated workflow for obtaining prior authorization for intensive outpatient care.' },
+                    { title: 'Bill', description: 'Clean claim submission with specialized behavioral health coding.' },
+                    { title: 'Optimize', description: 'Continuous audit to ensure session limits are never exceeded.' }
+                ]
+            },
+            {
+                type: 'kpi',
+                title: 'Behavioral Recovery Metrics',
+                subtitle: 'Real Results',
+                data: [
+                    { value: '25%', label: 'Revenue Increase', description: 'Average lift for mental health clinics within 90 days.' },
+                    { value: '99%', label: 'Authorization Success', description: 'Ensuring your services are pre-approved every single time.' }
+                ]
+            }
+        ]
+    },
+    {
+        title: "DME / Orthopedics",
+        slug: "dme-orthopedics",
+        bannerTitle: "Precision Billing for DME & Orthopedic Practices",
+        description: "Specialized RCM for durable medical equipment and surgical orthopedic workflows.",
+        sections: [
+            {
+                type: 'problem-snapshot',
+                title: 'DME Lifecycle Challenges',
+                data: [
+                    { title: 'Complex Modifiers', description: 'RR, UE, NU modifiers for rental vs purchase often lead to preventable denials.' },
+                    { title: 'Prior Auth Delays', description: 'Equipment delivery stalled by slow payer authorization responses.' },
+                    { title: 'Documentation Gaps', description: 'Ensuring medical necessity certificates (CMN) are perfectly executed before billing.' }
+                ]
+            },
+            {
+                type: 'workflow',
+                title: 'DME Order-to-Cash Workflow',
+                subtitle: 'Seamless Logistics',
+                data: [
+                    { title: 'Intake', description: 'Validation of physician orders and insurance eligibility for specific equipment.' },
+                    { title: 'Authorize', description: 'Rapid procurement of prior authorization via direct payer integrations.' },
+                    { title: 'Deliver', description: 'Proof of delivery (POD) capture to trigger compliant billing.' },
+                    { title: 'Audit', description: 'Continuous surveillance of rental cycles to ensure ongoing reimbursement.' }
+                ]
+            },
+            {
+                type: 'kpi',
+                title: 'Orthopedic Recovery',
+                subtitle: 'Surgical Precision',
+                data: [
+                    { value: '35%', label: 'Revenue Acceleration', description: 'Speeding up the cash cycle for expensive surgical implants and equipment.' },
+                    { value: '97%+', label: 'Audit Acceptance', description: 'Rigorous documentation standards that withstand DME Medicare audits.' }
+                ]
+            }
+        ]
+    }
+];
+
 export const servicesList: Service[] = [
     {
         title: "Eligibility Verification",
@@ -39,19 +120,33 @@ export const servicesList: Service[] = [
         description: "Comprehensive patient eligibility verification services.",
         sections: [
             {
-                title: "Eligibility Verification",
-                content: [
-                    "Physicians need to verify each patient’s eligibility and benefits to ensure they will receive payment for services rendered. We offer comprehensive patient eligibility verification services to help healthcare providers check coverage prior to the office visit. Our focus is on preventing denials and avoiding delays in payment, which will boost revenue at the time of service, save time on the back end, and also enhance patient satisfaction.",
-                    "Our health insurance eligibility verification specialists will confirm the following patient benefits on each date of service:",
-                    "• Coverage Verification– whether the patient has valid coverage or not",
-                    "• Demographic data – Patient Name & DOB is same as Payer",
-                    "• Benefit options – patient responsibility for co-pays and coinsurance",
-                    "• Plan Type – Verify patient plan type to avoid future denial",
-                    "• Prior authorization requirements – confirming authorization for treatment from appropriate sources, if applicable"
-                ],
-
-                image: "/img/eligibility-verification.jpg",
-                imagePosition: "left"
+                type: 'problem-snapshot',
+                title: 'The Hidden Cost of Poor Verification',
+                data: [
+                    { title: 'Eligibility Denials', description: 'Over 30% of denials stem from simple eligibility errors or inactive coverage.' },
+                    { title: 'Manual Verification', description: 'High labor costs and human error during manual portal checks.' },
+                    { title: 'Delayed Care', description: 'Patients turned away or delayed due to unverified insurance status.' }
+                ]
+            },
+            {
+                type: 'workflow',
+                title: 'Real-Time Verification Engine',
+                subtitle: 'Automated Precision',
+                data: [
+                    { title: 'Capture', description: 'Patient demographic data ingested via EMR integration.' },
+                    { title: 'Query', description: 'Automated 270/271 EDI transactions to payers for instant coverage verification.' },
+                    { title: 'Validate', description: 'Cross-check for secondary insurance, deductible balance, and co-pay requirements.' },
+                    { title: 'Notify', description: 'Instant alerts to front-desk staff for any eligibility discrepancies.' }
+                ]
+            },
+            {
+                type: 'kpi',
+                title: 'Verification Performance',
+                subtitle: 'Operational Excellence',
+                data: [
+                    { value: '99.9%', label: 'Accuracy Rate', description: 'Eliminating the guesswork from patient insurance coverage.' },
+                    { value: '< 2 Min', label: 'Processing Time', description: 'Instant feedback on patient eligibility for staff.' }
+                ]
             }
         ],
         featuresTitle: "Insurance Eligibility",
@@ -81,17 +176,34 @@ export const servicesList: Service[] = [
         ],
         sections: [
             {
-                title: "The Best Medical Billing Services",
-                content: [
-                    "SBN Healthcare Solution simplifies your billing, eradicates administrative burdens, boosts your revenue, and modernizes each and every piece of your practice management. Our dedication towards efficient billing can be seen in the shape of more income and profit margins for your practice.",
-                    "We understand your practice needs and give you the best possible ROI by focusing on Key areas of the billing and revenue cycle to get rid of the revenue leaks once and for all leaving you to focus more on delivering quality care to patients."
-                ],
-                image: "/img/medical-billing.jpg",
-                imagePosition: "left"
+                type: 'ai-indicator',
+                stage: 'Intelligent Charge Capture',
+                description: 'Our AI-driven charge entry system identifies missing charges and potential coding errors before submission.',
+                data: '98.5% First-Pass Clean Claims'
             },
             {
-                title: "Right Medical Billing to Double Grow Your Revenue",
-                content: "We assist you in managing your billing services to let you focus on patient-centered care while managing, retaining, and attracting new customers.",
+                type: 'workflow',
+                title: 'Full-Cycle Billing Precision',
+                subtitle: 'End-to-End Management',
+                data: [
+                    { title: 'Ingest', description: 'Seamless data retrieval from your EMR or secure encounter forms.' },
+                    { title: 'Scrub', description: 'Rigorous automated claim scrubbing for NCCI and payer-specific edits.' },
+                    { title: 'Submit', description: 'Direct EDI submission to primary, secondary, and tertiary payers.' },
+                    { title: 'Recover', description: 'Aggressive follow-up on any claim that doesn\'t result in appropriate payment within 15 days.' }
+                ]
+            },
+            {
+                type: 'kpi',
+                title: 'Billing Outcomes',
+                subtitle: 'Measured Success',
+                data: [
+                    { value: '15%', label: 'Revenue Lift', description: 'Average increase in collections for new clients in the first 6 months.' },
+                    { value: '25 Days', label: 'Average A/R', description: 'Consistently maintaining days in A/R well below industry benchmarks.' }
+                ]
+            },
+            {
+                title: "Ready to Transform Your Revenue Cycle?",
+                content: "Stop guessing and start growing. Our specialists are ready to conduct a comprehensive RCM audit for your practice today.",
                 type: "cta"
             }
         ]
@@ -103,53 +215,35 @@ export const servicesList: Service[] = [
         description: "Save valuable time and get paid faster by sending clean insurance claims the first time.",
         sections: [
             {
-                title: "Optimize Revenue Cycle with State-of-the-Art Medical Coding",
-                content: [
-                    "Get medical coding done right the first time and improve your practice’s revenue cycle management for faster reimbursement and higher collection rates.",
-                    "SBN Healthcare Solution reliable coding services offers a comprehensive suite of tools for simple and intuitive medical coding."
-                ],
-                image: "/img/medical-coding1.jpg",
-                imagePosition: "left"
+                type: 'ai-indicator',
+                stage: 'AI-Assisted Coding Accuracy',
+                description: 'Our proprietary AI engine cross-references clinical notes with ICD-10 and CPT databases to suggest the most precise codes, reducing human error.',
+                data: '99.2% Coding Accuracy'
             },
             {
-                title: "Experienced Team of Coders",
-                content: [
-                    "We thoroughly review all claims prior to submission and quickly make all the necessary edits before submitting the claims for payment.",
-                    "Our team of dedicated coders help speed up process to get claims out to payers quickly, significantly reducing the time for payment."
-                ],
-                image: "/img/medical-coding2.jpg",
-                imagePosition: "right"
+                type: 'workflow',
+                title: 'High-Velocity Coding Pipeline',
+                subtitle: 'Accuracy at Scale',
+                data: [
+                    { title: 'Ingest', description: 'Real-time retrieval of physician notes and clinical transcripts from EMR.' },
+                    { title: 'Screen', description: 'AI pre-coding and automated cross-referencing for NCCI edits.' },
+                    { title: 'Verify', description: 'CPC-certified review for complex cases and surgical procedure coding.' },
+                    { title: 'Finalize', description: 'Same-day completion of encounters for immediate billing submission.' }
+                ]
             },
             {
-                title: "Discover How Timely Reimbursements are Possible With Accurate Coding",
-                content: "",
+                type: 'kpi',
+                title: 'Coding Performance',
+                subtitle: 'Speed and Precision',
+                data: [
+                    { value: '24h', label: 'Turnaround Time', description: 'Ensuring your claims are ready for submission within one business day.' },
+                    { value: '98%+', label: 'Audit Acceptance', description: 'Consistent performance that stands up to the most rigorous payer audits.' }
+                ]
+            },
+            {
+                title: "Ready to Minimize Denials with Precise Coding?",
+                content: "Accuracy starts at the code level. Our certified experts are ready to optimize your coding workflow today.",
                 type: "cta"
-            },
-            {
-                title: "Medical Coding Audit",
-                content: [
-                    "We provide the right Evaluation and Management (E&M) levels for your practice management to ensure accurate reimbursement for your services.",
-                    "Our team of professional coders assign updated CPT, ICD-10, HCPCS codes and NCCI edits to minimize the error rate and ensure a less stressful audit process.",
-                    "Here’s what SBN Healthcare Solution coding and auditing services can do for you:"
-                ],
-                list: [
-                    "Ensure ICD-10 compliance and follow HIPAA guidelines",
-                    "Reduce any and all Discharged, not final billed (DNFB) cases.",
-                    "Significantly minimize Accounts Receivable (A/R) backlogs",
-                    "Help improve patient engagement by allowing healthcare providers to focus on patient care.",
-                    "Improve provider documentation and enhance data reporting."
-                ],
-                image: "/img/medical-coding3.jpg",
-                imagePosition: "left"
-            },
-            {
-                title: "ICD and CPT Coding",
-                content: [
-                    "Our certified professional coders are here to support your revenue cycle and provide the highest standards of coding accuracy and compliance.",
-                    "SBN Healthcare Solution Medical Coding Team is proficient in CPT, ICD-10, HCPCS codes and NCCI edits and assign the most accurate codes for services provided."
-                ],
-                image: "/img/medical-coding4.jpg",
-                imagePosition: "right"
             }
         ],
         featuresTitle: "Why Choose Us",
@@ -166,50 +260,47 @@ export const servicesList: Service[] = [
         description: "Account Receivable Follow-up Services",
         sections: [
             {
-                title: "Account Receivable Follow-up Services",
-                content: [
-                    "TODAY, MANY MEDICAL DOCTORS FIND THEIR MEDICAL PRACTICE GROWING IN THEIR MONTHLY EXPENSES BUT ARE NOT ATTAINING THE SAME PROGRESS IN THEIR REOCCURRING CASH FLOW. UNLESS EXACT AND REGULAR ACTIVE ACCOUNTS RECEIVABLE FOLLOW-UP ON THE CURRENT BILLINGS IS STARTED, IT IS COMMON TO FIND A PROVIDER WITH EXCESSIVE AMOUNTS IN MEDICAL A/R THAT ARE GREATER THAN 90 -180 DAYS OUTSTANDING.",
-                    "USUALLY THE VOLUME OF UNPAID CLAIMS AND THE TIME IT TAKES TO RESEARCH, CORRECT, APPEAL, AND RE-FILE THE CLAIMS WILL TAKE MUCH LONGER THAN ESTIMATED. THE LIMITED NUMBER OF STAFF DEDICATED TO THIS TASK WILL NOT BE ABLE TO ACCOMPLISH THE GOAL, WHICH IS TO EXTENSIVELY REDUCE/ELIMINATE THE OUTSTANDING A/R AND COLLECT AS MUCH MONEY AS POSSIBLE IN A SHORT PERIOD OF TIME."
-                ],
-                image: "/img/ar-follow-up-denial-management1.jpg",
-                imagePosition: "left"
+                type: 'problem-snapshot',
+                title: 'The Burden of Unchecked Ar/Denials',
+                data: [
+                    { title: 'Aging A/R > 90 Days', description: 'Hidden revenue leakage often hides in accounts that haven\'t been touched in months.' },
+                    { title: 'Generic Denial Codes', description: 'Automated payer responses that lack actionable intelligence.' },
+                    { title: 'Limited Staff Capacity', description: 'In-house teams overwhelmed by the volume of unpaid claims.' },
+                    { title: 'Missed Appeal Windows', description: 'Revenue permanently lost due to administrative delays.' }
+                ]
             },
             {
-                title: "What We Can Do For You?",
-                content: [
-                    "Our experts can help your organization to keep track of all the pending claims, investigate denials, follow-up on collections, track balances, and pursue any other due payments. Our services will help you reduce the number of AR days and improve your healthcare organization’s cash flow.",
-                    "Our dedicated AR Followup team is responsible for studying and analyzing denied claims as well as unfinished payments. Even more, in case any claim is found to bear any coding error. The team corrects this particular error and then resubmits the claim."
-                ],
-                image: "/img/ar-follow-up-denial-management2.jpg",
-                imagePosition: "right"
+                type: 'workflow',
+                title: 'Our Clean-Claim Engine',
+                subtitle: 'The SBN Process',
+                data: [
+                    { title: 'Analyze', description: 'Root-cause analysis of every denial using historical data.' },
+                    { title: 'Correct', description: 'Human-in-the-loop validation of CPT and ICD coding edits.' },
+                    { title: 'Execute', description: 'Strategic re-submission and aggressive Payer follow-up.' },
+                    { title: 'Recover', description: 'Verification of appropriate payment and aging report cleanup.' }
+                ]
             },
             {
-                title: "Process We Follow",
-                list: [
-                    "1.) Document Verification",
-                    "2.) Review CPT & ICD Code",
-                    "3.) Address Rejection",
-                    "4.) Verify Correct Denial Reason",
-                    "5.) Take Appropriate Action to resolve the Denial",
-                    "6.) Call Payer for Followup",
-                    "7.) Send Appeal or Reconsideration if Required"
-                ],
-                image: "/img/ar-follow-up-denial-management3.jpg",
-                imagePosition: "left"
+                type: 'ai-indicator',
+                stage: 'Predictive Denial Mapping',
+                description: 'Our AI engine analyzes Payer patterns to predict potential denials before claims are even submitted, allowing for proactive correction.',
+                data: '94% Prediction Accuracy'
             },
             {
-                title: "Benefits of Choosing Us",
-                list: [
-                    "1.) Affordable AR Follow-up Service",
-                    "3.) Better Productivity",
-                    "4.) Skilled Professionals Team",
-                    "5.) Expedite Claim Payment in Turn around time",
-                    "6.) Increase in AR Collection",
-                    "7.) Decrease Denial & Rejections",
-                    "8.) Autmative mechanism for Denial Management"
-                ],
-                image: "/img/Denial-Management.png",
-                imagePosition: "right"
+                type: 'kpi',
+                title: 'Measurable Financial Recovery',
+                subtitle: 'Performance Benchmarks',
+                data: [
+                    { value: '30%', label: 'Reduction in A/R Days', description: 'Accelerating cash flow by shortening the billing cycle.' },
+                    { value: '98%', label: 'Clean Claim Rate', description: 'First-pass acceptance rate through rigorous scrubbing.' },
+                    { value: '15%', label: 'Revenue Lift', description: 'Average increase in collected revenue within 6 months.' },
+                    { value: '24/7', label: 'Monitor', description: 'Continuous surveillance of claim status across all Payers.' }
+                ]
+            },
+            {
+                title: "Ready to Recover Your Revenue?",
+                content: "Stop the leakage. Let our specialists conduct a free audit of your current aging reports and identify immediate recovery opportunities.",
+                type: "cta"
             }
         ]
     },
@@ -220,39 +311,38 @@ export const servicesList: Service[] = [
         description: "Credentialing and contracting services.",
         sections: [
             {
-                title: "Credentialing & Contracting",
-                content: "Credentialing and contracting are the basis of starting a clinic or healthcare facility. They also lay the root for your relationships with insurance companies as well as patients. For physician and organization reimbursement, it’s critically to have a designated, well-managed credentialing and re-credentialing service. And that is what you get with our team.",
-                image: "/img/intro-img.jpg",
-                imagePosition: "left"
-            },
-            {
-                title: "New Payer Credentialing & Credentialing Maintenance",
-                list: [
-                    "Apply for all designated payers and follow-up until a determination by the payer",
-                    "Update and maintain CAQH database",
-                    "Update and maintain NPI database",
-                    "Apply for re-credentialing when due by each payer",
-                    "Medical License/DEA Registration/expirations",
-                    "Change from one practice to another",
-                    "Add a new physician to your existing group",
-                    "Want to become a network provider"
-                ],
-                image: "/img/service2.jpg",
-                imagePosition: "right"
-            },
-            {
-                title: "Documents Required",
-                list: [
-                    "All state medical licenses",
-                    "Drug Enforcement Agency Certificate",
-                    "State Board of Pharmacy/Controlled Substance Certification (if applicable)",
-                    "All educational diplomas",
-                    "Board Certificate or Letter of Acceptance",
-                    "Current Curriculum Vitae",
-                    "Any other documentation required by the payer",
-                    "Hospital Affiliations Letter",
-                    "Bank information and voided check"
+                type: 'problem-snapshot',
+                title: 'The Enrollment Bottleneck',
+                data: [
+                    { title: 'Delayed Revenue', description: 'New providers often wait 90-120 days to start billing while waiting for enrollment.' },
+                    { title: 'Incomplete Filings', description: 'Application rejections due to missing CAQH updates or expired licenses.' },
+                    { title: 'Out-of-Network Risks', description: 'High patient costs and lost volume due to expired or unmaintained contracts.' }
                 ]
+            },
+            {
+                type: 'workflow',
+                title: 'Rapid Provider Enrollment',
+                subtitle: 'Accelerated Access',
+                data: [
+                    { title: 'Onboard', description: 'Comprehensive documentation collection and verification (License, DEA, CV).' },
+                    { title: 'Submit', description: 'Strategic payer application submission via portal or direct EDI.' },
+                    { title: 'Monitor', description: 'Aggressive weekly follow-up with payer credentialing committees.' },
+                    { title: 'Network', description: 'Final contract execution and NPI/Payer ID linkage in EMR.' }
+                ]
+            },
+            {
+                type: 'kpi',
+                title: 'Credentialing Velocity',
+                subtitle: 'Market Readiness',
+                data: [
+                    { value: '-30%', label: 'Enrollment Lead Time', description: 'Average reduction in time-to-first-claim for new providers.' },
+                    { value: '100%', label: 'Compliance Audit', description: 'Ensuring every provider is fully licensed and credentialed across all active payers.' }
+                ]
+            },
+            {
+                title: "Ready to Start Billing Faster?",
+                content: "Don't let paperwork slow down your growth. Our enrollment experts are ready to handle the heavy lifting for you.",
+                type: "cta"
             }
         ],
         featuresTitle: "Provider Enrollment and Credentialing",
@@ -270,26 +360,34 @@ export const servicesList: Service[] = [
         description: "Services that clean the credit balance backlog.",
         sections: [
             {
-                title: "Credit Balance Resolution",
-                content: [
-                    "SBN Healthcare Solution provides a wide range of services that clean the credit balance backlog from the aging report so that it reflects the exact profit of the practice. We are specialized in enhancing financial performance by efficiently managing the revenue cycle services.",
-                    "Overpayment balances are a part of everyday life in a physician’s practice or hospital. Smaller credits might not affect the reports in any manner, but if not resolved lately, credit balance accounts affect the profitability of the practice and lead to misleading the reports.",
-                    "Generally, credit balance arises due to incorrect adjustments, Incorrect Billing Correction, and improper use of transection codes, duplicate payment posting, or overpayments from carriers. Failure to address credit balance accounts in a timely manner results in the accumulation of huge credit balances and compliance risks if accounts are audited."
-                ],
-                image: "/img/credit-balance-resolution.jpg",
-                imagePosition: "left"
+                type: 'problem-snapshot',
+                title: 'The Burden of Credit Balances',
+                data: [
+                    { title: 'Inaccurate Aging', description: 'Credit balances hide true receivables, leading to misleading financial reports.' },
+                    { title: 'Compliance Risk', description: 'Federal and State laws require timely identification and return of overpayments.' },
+                    { title: 'Administrator Overhead', description: 'Internal staff often lack the time to research complex overpayment scenarios.' }
+                ]
             },
             {
-                title: "What we can do for you?",
-                list: [
-                    "Analyze Charge and payment posting distribution during payment posting",
-                    "Review Accounts for correct patient Liability & Adjustment",
-                    "Review for duplicate posting & overpayment",
-                    "Rectify posting & adjustment Errors",
-                    "Process refund or takeback if true Credit Balance found"
-                ],
-                content: "Researching and rectifying all the overpayment account is very crucial work for a practice or individual because it required time and expertise which effect the daily work of internal staff and also increase the overhead. On the other hand, our team of highly dedicated professionals will research accounts with credit status, research the reason behind credit balance and take appropriate action to resolve it."
+                type: 'workflow',
+                title: 'Clean Aging Initiative',
+                subtitle: 'Precision Resolution',
+                data: [
+                    { title: 'Identify', description: 'Deep audit of aging reports to find accounts with credit balance status.' },
+                    { title: 'Analyze', description: 'Root-cause analysis: duplicate posting, overpayment, or adjustment errors.' },
+                    { title: 'Resolve', description: 'Immediate correction of posting errors or processing of patient/payer refunds.' },
+                    { title: 'Cleanse', description: 'Final report validation to ensure aging accurately reflects practice profit.' }
+                ]
+            },
+            {
+                type: 'kpi',
+                title: 'Resolution Impact',
+                subtitle: 'Audited Clarity',
+                data: [
+                    { value: '100%', label: 'Compliance Guarantee', description: 'Eliminating the risk of OIG or payer audits related to overpayments.' },
+                    { value: '0', label: 'Credit Backlog', description: 'Our goal is a pristine ledger with zero unresolved credit balances.' }
+                ]
             }
-        ]
+        ],
     }
 ];

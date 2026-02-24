@@ -108,3 +108,71 @@ button {
   /* from source hover */
   color: white;
 }
+
+/* Premium Slide-Up Animation Utility */
+.btn-premium {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem 3rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 0.875rem;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 12px;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.btn-premium .btn-text-default {
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-premium .btn-text-hover {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-premium:hover .btn-text-default {
+  transform: translateY(-100%);
+}
+
+.btn-premium:hover .btn-text-hover {
+  transform: translateY(-100%);
+}
+
+.btn-premium-teal {
+  background: var(--primary-color);
+  color: white;
+  box-shadow: 0 20px 40px rgba(31, 166, 160, 0.2);
+}
+
+.btn-premium-teal:hover {
+  background: var(--secondary-color);
+  box-shadow: 0 25px 50px rgba(31, 166, 160, 0.3);
+  transform: translateY(-5px);
+}
+
+.btn-premium-dark {
+  background: var(--secondary-color);
+  color: white;
+  box-shadow: 0 20px 40px rgba(11, 31, 51, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-premium-dark:hover {
+  background: var(--primary-color);
+  box-shadow: 0 25px 50px rgba(11, 31, 51, 0.3);
+  transform: translateY(-5px);
+}

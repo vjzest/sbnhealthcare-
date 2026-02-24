@@ -33,7 +33,7 @@ function DashboardLayoutContent({ children }: { children: React.ReactNode }) {
     ];
 
     return (
-        <div className="flex h-[calc(100vh-135px)] overflow-hidden">
+        <div className="flex h-screen overflow-hidden">
             {/* Sidebar */}
             <aside className="w-64 bg-[var(--secondary-color)] text-white flex flex-col h-full border-r border-white/5">
                 <div className="p-8 border-b border-white/5">
