@@ -26,7 +26,7 @@ const testimonials: Testimonial[] = [
         metricLabel: "Reduction in A/R Days",
         quote: "SBN Healthcare transformed our revenue cycle. We saw an immediate impact on our cash flow within the first 90 days. Their automated scrubbing is a game changer.",
         avatar: "/img/avatar1.jpg",
-        videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4" // Placeholder video
+        videoUrl: "/img/v2.mp4"
     },
     {
         id: 2,
@@ -37,7 +37,7 @@ const testimonials: Testimonial[] = [
         metricLabel: "First-Pass Acceptance",
         quote: "The level of transparency SBN provides is unmatched. We finally feel like we have a partner who is as invested in our financial success as we are.",
         avatar: "/img/avatar2.jpg",
-        videoUrl: "https://www.w3schools.com/html/movie.mp4" // Placeholder video
+        videoUrl: "/img/v3.mp4"
     },
     {
         id: 3,
@@ -48,7 +48,18 @@ const testimonials: Testimonial[] = [
         metricLabel: "Revenue Recovered",
         quote: "Processing denials used to be a nightmare. With SBN, it's seamless. Our staff can finally focus on patient care instead of fighting with payers.",
         avatar: "/img/avatar3.jpg",
-        videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4" // Placeholder video
+        videoUrl: "/img/v4.mp4"
+    },
+    {
+        id: 4,
+        name: "Dr. Michael Chen",
+        title: "Chief Financial Officer",
+        practice: "Harmony Health Group",
+        metric: "42%",
+        metricLabel: "Denial Rate Reduced",
+        quote: "Switching to SBN was the best operational decision we made. Their proactive denial management and real-time reporting give us full visibility into our finances.",
+        avatar: "/img/avatar4.jpg",
+        videoUrl: "/img/v5.mp4"
     }
 ];
 
@@ -68,7 +79,7 @@ const Testimonials = () => {
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
                     {testimonials.map((item) => (
                         <motion.div
                             key={item.id}

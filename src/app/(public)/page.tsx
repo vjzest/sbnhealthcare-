@@ -7,6 +7,7 @@ import Hero from '@/components/home/Hero';
 import Stats from '@/components/home/Stats';
 import ProcessFlow from '@/components/home/ProcessFlow';
 import WhatWeDo from '@/components/home/WhatWeDo';
+import OfficeOperations from '@/components/home/OfficeOperations';
 import SoftwareExpertise from '@/components/home/SoftwareExpertise';
 import Pricing from '@/components/home/Pricing';
 import Testimonials from '@/components/home/Testimonials';
@@ -26,6 +27,7 @@ export default function Home() {
       <Stats />
       <ProcessFlow />
       <WhatWeDo />
+      <OfficeOperations />
       <SoftwareExpertise />
       <Pricing />
       <Testimonials />
