@@ -19,7 +19,7 @@ interface Props {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-    const { slug } = params;
+    const { slug } = await params;
     const dynamic = await getDynamicMetadata(slug);
     const service = servicesList.find((s) => s.slug === slug);
     if (!service) return { title: dynamic?.title || 'Service Not Found' };

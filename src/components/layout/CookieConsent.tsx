@@ -35,33 +35,37 @@ const CookieConsent = () => {
         <AnimatePresence>
             {isVisible && (
                 <motion.div
-                    initial={{ opacity: 0, y: 50 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 20 }}
-                    className="fixed bottom-4 left-4 right-4 md:left-auto md:right-6 md:bottom-6 md:max-w-[340px] z-[9999]"
+                    initial={{ opacity: 0, x: 100 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: 100 }}
+                    transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+                    className="fixed bottom-6 right-6 z-[9999] max-w-[320px] w-full"
                 >
-                    <div className="bg-white rounded-lg shadow-[0_5px_30px_rgba(0,0,0,0.12)] border border-slate-200 p-5">
-                        <div className="text-slate-600 text-[13px] leading-relaxed mb-5">
-                            <p className="mb-3">
-                                We use cookies to enhance your experience, analyze site traffic, and serve tailored advertisements.
-                            </p>
-                            <p>
-                                By clicking "Accept," you agree to our use of cookies as detailed in our <a href="/privacy-policy" className="text-blue-600 hover:underline font-medium">Cookie Policy</a>.
-                            </p>
+                    <div className="bg-[#0B1F2A]/95 backdrop-blur-xl rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] border border-white/10 p-4">
+                        <div className="flex items-start gap-3 mb-4">
+                            <div className="w-8 h-8 rounded-full bg-[var(--primary-color)]/20 flex items-center justify-center flex-shrink-0">
+                                <span className="text-[var(--primary-color)] text-lg">🍪</span>
+                            </div>
+                            <div className="text-white/80 text-[12px] leading-relaxed">
+                                <p>
+                                    We use cookies to enhance your experience and analyze traffic.
+                                    <a href="/privacy-policy" className="text-[var(--primary-color)] ml-1 hover:underline font-bold">Policy</a>
+                                </p>
+                            </div>
                         </div>
 
                         <div className="flex gap-2">
                             <button
                                 onClick={handleAccept}
-                                className="flex-1 bg-[#0B1F33] text-white text-[13px] font-bold py-2.5 rounded transition-colors hover:bg-black"
+                                className="flex-1 bg-[var(--primary-color)] text-white text-[11px] font-black py-2 rounded-xl transition-all hover:scale-[1.02] active:scale-95 uppercase tracking-wider"
                             >
                                 Accept
                             </button>
                             <button
                                 onClick={handlePreferences}
-                                className="flex-1 bg-white text-slate-700 border border-slate-300 text-[13px] font-bold py-2.5 rounded transition-all hover:bg-slate-50"
+                                className="px-4 bg-white/5 text-white/60 border border-white/10 text-[11px] font-bold py-2 rounded-xl transition-all hover:bg-white/10"
                             >
-                                Preferences
+                                Settings
                             </button>
                         </div>
                     </div>

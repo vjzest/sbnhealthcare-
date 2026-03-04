@@ -20,7 +20,7 @@ interface Props {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-    const { slug } = params;
+    const { slug } = await params;
     const dynamic = await getDynamicMetadata(`specialty-${slug}`);
     const specialty = specialtiesList.find((s) => s.slug === slug);
     if (!specialty) return { title: dynamic?.title || 'Specialty Not Found' };
